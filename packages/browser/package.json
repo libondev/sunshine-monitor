@@ -19,12 +19,12 @@
     }
   },
   "scripts": {
-    "build:watch": "pnpm build:watch:transpile & pnpm build:watch:types",
-    "build:watch:transpile": "tsup --watch",
-    "build:watch:types": "tsc -p tsconfig.types.json --watch",
-    "build": "pnpm build:transpile && pnpm build:types",
     "build:transpile": "tsup",
     "build:types": "tsc -p tsconfig.types.json",
+    "build:watch:transpile": "tsup --watch",
+    "build:watch:types": "tsc -p tsconfig.types.json --watch",
+    "build:watch": "pnpm build:watch:transpile & pnpm build:watch:types",
+    "build:lib": "pnpm build:transpile && pnpm build:types",
     "typecheck": "tsc --noEmit"
   },
   "keywords": [],
