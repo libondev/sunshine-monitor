@@ -30,6 +30,10 @@ export class ResponseInterceptor<T> implements NestInterceptor<T, ApiResponse<T>
     // 从装饰器获取自定义消息，没有则使用默认值
     const message = this.reflector.get<string>(RESPONSE_MESSAGE_KEY, context.getHandler()) ?? '操作成功'
 
+    // 统一设置 HTTP 状态码为 200
+    const response = context.switchToHttp().getResponse()
+    response.status(200)
+
     return next.handle().pipe(
       map(data => ({
         code: 200,

@@ -1,18 +1,24 @@
 import { ConflictException, Injectable } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt'
 import * as bcrypt from 'bcrypt'
 
 import { Prisma } from '@/generated/prisma/client'
 
+import { JwtPayload } from '../auth/interfaces/jwt-payload.interface'
 import { PrismaService } from '../prisma'
 import { CreateUserDto } from './dto/create-user.dto'
-import { User } from './entities/user.entity'
+import { ResLoginDto } from './dto/res-login.dto'
+import { User, UserWithPassword } from './entities/user.entity'
 
 /** bcrypt 加密轮数，值越大越安全但性能开销也越大 */
 const SALT_ROUNDS = 10
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService
+  ) {}
 
   /**
    * 创建新用户
@@ -49,6 +55,24 @@ export class UserService {
     const user = await this.prisma.user.create({ data })
 
     return this.excludePassword(user)
+  }
+
+  /**
+   * 用户登录，生成 JWT token
+   * @param user - 已验证的用户信息
+   * @returns 包含 accessToken 和用户信息的对象
+   */
+  async login(user: UserWithPassword): Promise<ResLoginDto> {
+    const payload: JwtPayload = {
+      sub: user.id,
+      username: user.username,
+      role: user.role,
+    }
+
+    return {
+      accessToken: this.jwtService.sign(payload),
+      user: this.excludePassword(user),
+    }
   }
 
   /**
