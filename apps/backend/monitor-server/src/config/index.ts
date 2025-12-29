@@ -1,6 +1,6 @@
 export const loadConfig = () => {
   return {
-    port: parseInt(process.env.PORT, 10),
+    port: '3003',
     prefix: process.env.PREFIX,
     jwt: {
       /** JWT 签名密钥，生产环境务必使用强密钥 */

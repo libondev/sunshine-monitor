@@ -1,4 +1,9 @@
 autoincrement
 clickhouse
+initdb
+Mbps
+micromessenger
 Prefixs
+qqbrowser
 styl
+ucbrowser

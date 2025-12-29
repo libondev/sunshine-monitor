@@ -92,12 +92,21 @@ importers:
 
   apps/backend/dsn-server:
     dependencies:
+      '@clickhouse/client':
+        specifier: ^1.15.0
+        version: 1.15.0
       '@nestjs/common':
         specifier: ^11.0.1
         version: 11.1.9(class-transformer@0.5.1)(class-validator@0.14.3)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/config':
+        specifier: ^4.0.2
+        version: 4.0.2(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.3)(reflect-metadata@0.2.2)(rxjs@7.8.2))(rxjs@7.8.2)
       '@nestjs/core':
         specifier: ^11.0.1
         version: 11.1.9(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.3)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/platform-express@11.1.9)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/mapped-types':
+        specifier: '*'
+        version: 2.1.0(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.3)(reflect-metadata@0.2.2)(rxjs@7.8.2))(class-transformer@0.5.1)(class-validator@0.14.3)(reflect-metadata@0.2.2)
       '@nestjs/platform-express':
         specifier: ^11.0.1
         version: 11.1.9(@nestjs/common@11.1.9(class-transformer@0.5.1)(class-validator@0.14.3)(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.9)
@@ -126,9 +135,6 @@ importers:
       '@types/express':
         specifier: ^5.0.0
         version: 5.0.6
-      '@types/node':
-        specifier: ^22.10.7
-        version: 22.19.3
       source-map-support:
         specifier: ^0.5.21
         version: 0.5.21
@@ -141,9 +147,6 @@ importers:
       tsconfig-paths:
         specifier: ^4.2.0
         version: 4.2.0
-      typescript:
-        specifier: ^5.7.3
-        version: 5.9.3
 
   apps/backend/monitor-server:
     dependencies:
@@ -335,9 +338,6 @@ importers:
         specifier: ^3.25.67
         version: 3.25.76
     devDependencies:
-      '@eslint/js':
-        specifier: ^9.29.0
-        version: 9.39.2
       '@types/react':
         specifier: ^19.1.8
         version: 19.2.7
@@ -359,7 +359,7 @@ importers:
 
   demos/vanilla:
     devDependencies:
-      '@sunshine/monitor-sdk-browser':
+      '@sunshine-monitor/browser':
         specifier: workspace:*
         version: link:../../packages/browser
       typescript:
@@ -369,7 +369,18 @@ importers:
         specifier: ^7.2.4
         version: 7.3.0(@types/node@22.19.3)(jiti@2.6.1)(lightningcss@1.30.2)(terser@5.44.1)(yaml@2.8.2)
 
-  packages/browser: {}
+  packages/browser:
+    dependencies:
+      '@sunshine-monitor/browser-utils':
+        specifier: workspace:*
+        version: link:../browser-utils
+      '@sunshine-monitor/core':
+        specifier: workspace:*
+        version: link:../core
+
+  packages/browser-utils: {}
+
+  packages/core: {}
 
 packages:
 
@@ -507,6 +518,13 @@ packages:
 
   '@chevrotain/utils@10.5.0':
     resolution: {integrity: sha512-hBzuU5+JjB2cqNZyszkDHZgOSrUUT8V3dhgRl8Q9Gp6dAj/H5+KILGjbhDpc3Iy9qmqlm/akuOI2ut9VUtzJxQ==}
+
+  '@clickhouse/client-common@1.15.0':
+    resolution: {integrity: sha512-/1BXaNNsBzH2w5ALWiH6M9zS+cJwlM9uMnMj9e8ETwvDjJzO+nIYlyxzp8Prc+9pEDZ5iAilZ4F8c0YVCzzNaA==}
+
+  '@clickhouse/client@1.15.0':
+    resolution: {integrity: sha512-QmW+p4c/r0oa3X6Un6lcBs4GZtJEQUdvf//x8GeqM5ru6m4oIUg3WwvermP3HE31kpEGoFOQfKbMN5ooR5gvNw==}
+    engines: {node: '>=16'}
 
   '@code-inspector/core@1.3.3':
     resolution: {integrity: sha512-1SUCY/XiJ3LuA9TPfS9i7/cUcmdLsgB0chuDcP96ixB2tvYojzgCrglP7CHUGZa1dtWuRLuCiDzkclLetpV4ew==}
@@ -6513,6 +6531,12 @@ snapshots:
 
   '@chevrotain/utils@10.5.0': {}
 
+  '@clickhouse/client-common@1.15.0': {}
+
+  '@clickhouse/client@1.15.0':
+    dependencies:
+      '@clickhouse/client-common': 1.15.0
+
   '@code-inspector/core@1.3.3':
     dependencies:
       '@vue/compiler-dom': 3.5.26
@@ -9515,7 +9539,7 @@ snapshots:
 
   dotenv-expand@12.0.1:
     dependencies:
-      dotenv: 16.4.7
+      dotenv: 16.6.1
 
   dotenv@16.4.7: {}
 

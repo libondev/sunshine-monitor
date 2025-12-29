@@ -2,11 +2,13 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.ts'
-import { init } from '@sunshine/monitor-sdk-browser'
+import { init } from '@sunshine-monitor/browser'
 
-init({
-  dsn: 'abcde',
+const monitoring = init({
+  dsn: 'app_bcc1fcd324a742f1',
 })
+
+monitoring.reportMessage('报错啦')
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   <div>

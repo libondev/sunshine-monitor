@@ -1,5 +1,5 @@
 {
-  "name": "@sunshine/dsn-server",
+  "name": "@sunshine-monitor/dsn-server",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -13,8 +13,11 @@
     "start:prod": "node dist/main"
   },
   "dependencies": {
+    "@clickhouse/client": "^1.15.0",
     "@nestjs/common": "^11.0.1",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.1",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^11.0.1",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",

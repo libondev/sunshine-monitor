@@ -1,5 +1,5 @@
 {
-  "name": "@sunshine-monitor/browser",
+  "name": "@sunshine-monitor/browser-utils",
   "version": "1.0.0",
   "description": "",
   "main": "build/cjs/index.js",
@@ -30,9 +30,5 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.11.0",
-  "dependencies": {
-    "@sunshine-monitor/core": "workspace:*",
-    "@sunshine-monitor/browser-utils": "workspace:*"
-  }
+  "packageManager": "pnpm@10.11.0"
 }
